@@ -1,0 +1,18 @@
+@import models.contact.ContactDepartment
+@(department: List[ContactDepartment])
+
+@main("Welcome to Play") {
+
+    <font color="red">@flash.get("errors")</font>
+    <form method="post" action="@routes.SupportController.postDepartment()">
+        <label>Département de support</label>
+        <input type="text" name="department" /><br/>
+        <input type="submit" value="Ajouter un département" />
+    </form>
+
+    @for(d <- department) {
+        <p>• @d.department</p>
+    }
+}
+
+

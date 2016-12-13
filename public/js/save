@@ -1,0 +1,68 @@
+
+var vue = new Vue({
+
+    el: '#app',
+
+    data: {
+        message: "",
+
+        request: "",
+
+        messages: []
+    },
+
+    // messageObj: {
+    //     author: "",
+    //     content: "",
+    //     id: 0
+    // }
+
+    methods: {
+
+        actualize: function () {
+
+            console.log("execute actualize()");
+            var v = $.ajax({
+                type: "GET",
+                url: "/chat/all",
+                async: false
+            }).responseText;
+
+            this.jsoned = JSON.parse(v);
+            var j = this.jsoned;
+            var i = 0;
+
+            this.messages = [];
+            while (j[i] != null) {
+                this.messages.push({
+                    author: j[i].author,
+                    content: j[i].content,
+                    id:  j[i].id,
+                    date: j[i].date,
+                    imageLoc: "/assets/" + j[i].imageLoc
+                });
+                i++;
+            }
+            this.request = j
+        },
+
+        sendMessage: function () {
+
+            var message = this.message;
+            if(message.length == 0)
+                return;
+
+            $.post(
+                'chat/submit',
+                {
+                    message: message
+                }
+            );
+
+            this.message = "";
+
+            var self = this;
+
+        }
+    }
+});

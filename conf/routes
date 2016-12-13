@@ -1,0 +1,39 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+
+GET      /test                                  controllers.TestController.index()
+GET      /chat/all                              controllers.TestController.chatMessages()
+POST     /chat/submit                           controllers.TestController.addMessage()
+
+GET      /register                              controllers.UserController.connectPage()
+POST     /register                              controllers.UserController.register()
+
+POST     /enregistrement                        controllers.UserController.connectPage()
+
+GET      /login                                 controllers.UserController.connectPage()
+POST     /login                                 controllers.UserController.login()
+
+GET      /logout                                controllers.UserController.logout()
+
+GET      /dashboard/profile                     controllers.DashboardController.profile()
+POST     /dashboard/profile                     controllers.DashboardController.profilePost()
+GET      /dashboard/change/password             controllers.DashboardController.changePassword()
+POST     /dashboard/change/password             controllers.DashboardController.passwordPost()
+
+GET      /generate/pseudo                       controllers.GeneratePseudoController.generatePage()
+GET      /generate/pseudo/nb=:nb&syll=:syll     controllers.GeneratePseudoController.generate(nb: Integer, syll: Integer)
+
+GET      /validate/code                         controllers.CodeController.index()
+
+GET      /contacter                             controllers.SupportController.index()
+POST     /contacter                             controllers.SupportController.postContact()
+GET      /contacter/all                         controllers.SupportController.contactList()
+GET      /contacter/addDepartment               controllers.SupportController.department()
+POST     /contacter/addDepartment               controllers.SupportController.postDepartment()
+
+#JavaScript Routes
+POST     /javascript/code_verification          controllers.JavascriptController.codeVerification()
+
+GET      /assets/*file                          controllers.Assets.at(path="/public", file)

@@ -1,0 +1,31 @@
+@import models.contact.ContactDepartment
+@(department: List[ContactDepartment])
+
+@main("Welcome to Play") {
+
+    <font color="red">@flash.get("errors")</font>
+    <f method="post" action="@routes.SupportController.postContact()">
+        <label>Votre nom </label>
+        <input type="text" name="lastName" /><br/>
+
+        <label>Votre email </label>
+        <input type="email" name="email" /><br/>
+
+        <label>Sujet </label>
+        <input type="text" name="subject" /><br/>
+
+        <label>Site </label>
+        <input type="url" name="website" /><br/>
+
+        <label>Département </label>
+        <select name="department">
+        @for(d <- department) {
+            <option value="@d.department" >@d.department</option>
+        }
+        </select><br>
+
+        <textarea name="content">Votre demmande ici</textarea><br>
+
+        <input type="submit" name="pushTicket" value="Envoyer un ticket" />
+    </f>
+}

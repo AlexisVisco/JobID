@@ -1,0 +1,33 @@
+@()
+@import views.enums.PanelType
+@import play.Logger;
+
+<form method="post" class="submit-form customform loginform" action="@routes.UserController.register()">
+  <h4>S'inscrire</h4>
+  @Logger.debug("Error ? " + flash().get("e-register"))
+  @module.note.render(PanelType.SUCCESS, "s-register")
+  @module.note.render(PanelType.DANGER, "e-register")
+  <div class="input-group">
+    <span class="input-group-addon"><i class="fa fa-user-secret"></i></span>
+    <input type="text" class="form-control" name="lastName" placeholder="Nom">
+  </div>
+  <div class="input-group">
+    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+    <input type="text" class="form-control" name="firstName" placeholder="Prénom">
+  </div>
+  <div class="input-group">
+    <span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
+    <input type="email" class="form-control"  name="email" placeholder="Email">
+  </div>
+  <div class="input-group">
+    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+    <input type="password" class="form-control" name="password" placeholder="Mot de passe">
+  </div>
+  <div class="input-group">
+    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+    <input type="password" class="form-control" name="repPassword" placeholder="Confirmer le mot de passe">
+  </div>
+  <br>
+  <button type="submit" class="btn btn-custom">S'inscrire</button>
+
+</form>

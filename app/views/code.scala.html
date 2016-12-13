@@ -1,0 +1,44 @@
+@()
+@main("Validez votre code") {
+
+    <div class="section db">
+        <div class="container">
+            <div class="page-title text-center">
+                <div class="heading-holder">
+                    <h1>Validez votre code</h1>
+                </div>
+            </div>
+        </div><!-- end container -->
+    </div>
+        <!-- end section -->
+
+    <br>
+
+    <div class="section wb">
+        <div class="container">
+            <div class="row" id="code">
+                <div class="col-md-6 col-md-push-3">
+                    <div class="submit-form customform loginform">
+                        <h4>Vous avez un code ?</h4>
+                        <div v-if="error">
+                            <div class="alert alert-danger">
+                                <p v-for="mess in s">{{mess}}</p>
+                            </div>
+                        </div>
+                        <div v-if="!error && ok">
+                            <div class="alert alert-success">
+                                <p v-for="mess in s">{{mess}}</p>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                            <input v-model="code" type="text" class="form-control" placeholder="Entrez votre code">
+                        </div>
+                        <input v-on:click="checkCode" name="login" type="submit" class="btn btn-custom" value="Vérifier le code">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script src="@routes.Assets.at("js/custom/codeVerif.js")"></script>

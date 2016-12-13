@@ -1,0 +1,99 @@
+@()
+@import models.User; var u: String = User.getByMail(session().get("email")).firstName;
+@import com.nappin.play.recaptcha.WidgetHelper;
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="@routes.Assets.at("css/chat.css")" rel="stylesheet">
+
+
+    @main("Testons") {
+
+        <br>
+
+        <div id="app">
+            <div class="section wb">
+                <div class="container">
+                    <div class="col-md-10 col-lg-12">
+                        <div class="panel">
+                                <!--Heading-->
+                            <div class="panel-heading">
+                                <div class="panel-control">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default" v-on:click="actualize"><i class="fa fa-refresh"></i></button>
+                                    </div>
+                                </div>
+                                <h3 class="panel-title">Chat</h3>
+                            </div>
+
+                                <!--Widget body-->
+                            <div id="demo-chat-body" class="collapse in">
+                                <div class="nano has-scrollbar" style="height: 500px">
+                                    <div class="nano-content pad-all" tabindex="0" style="right: -17px;">
+                                        <ul class="list-unstyled media-block" v-for="mess in messages">
+                                            <li v-if="mess.author === '@u'" class="mar-btm">
+                                                <div :id="id" class="media-right">
+                                                    <img :src="mess.imageLoc" class="img-circle img-sm" alt="Profile Picture">
+                                                </div>
+                                                <div class="media-body pad-hor speech-right">
+                                                    <div class="speech">
+                                                        <a class="media-heading">{{ mess.author }}</a>
+                                                        <p>{{ mess.content }}</p>
+                                                        <p class="speech-time">
+                                                            <i class="fa fa-clock-o fa-fw"></i>{{ mess.date }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li v-else class="mar-btm">
+                                                <div :id="id" class="media-left">
+                                                    <img :src="mess.imageLoc" class="img-circle img-sm" alt="Profile Picture">
+                                                </div>
+                                                <div class="media-body pad-hor">
+                                                    <div class="speech">
+                                                        <a class="media-heading">{{ mess.author }}</a>
+                                                        <p>{{ mess.content }}</p>
+                                                        <p class="speech-time">
+                                                            <i class="fa fa-clock-o fa-fw"></i>{{ mess.date }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </li>
+
+
+                                        </ul>
+                                    </div>
+
+                                    <div class="nano-pane"><div class="nano-slider" style="height: 141px;
+                                        transform: translate(0px, 0px);"></div></div></div>
+
+                                    <!--Widget footer-->
+
+                                <div class="panel-footer">
+
+                                    <div class="row">
+                                        <div class="col-xs-9">
+                                            <input v-if="withEnter" type="text" v-on:keyup.enter.prevent="sendMessage" v-model="message" class="form-control chat-input">
+                                            <input v-else type="text" v-model="message" class="form-control chat-input">
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <button class="btn btn-primary btn-block" v-on:click="sendMessage">Envoyer</button>
+                                        </div>
+                                        <div class="col-xs-9" >
+                                            <label><input class="check-box" type="checkbox" v-model="withEnter" value="">
+                                                Envoyer les messages avec la trouche 'entrer'</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <!-- TEST PART !-->
+        <br>
+        <br>
+        <br>
+        <br>
+
+    }

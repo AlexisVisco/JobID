@@ -1,0 +1,170 @@
+@(title: String)(content: Html)
+@import models.User; var user = User.getByMail(session().get("email"));
+@import play.mvc.Controller
+<!DOCTYPE html>
+    <html lang="fr">
+
+        <head>
+            <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+                <!-- SITE META -->
+            <title>@title</title>
+            <meta name="description" content="Recherchez votre emploi ou proposez vous en tant que candiat !">
+            <meta name="author" content="Kwizzy">
+            <meta name="keywords" content="job, pole emplois, jobid">
+
+                <!-- FAVICONS -->
+            <link rel="shortcut icon" href="@routes.Assets.at("images/favicon.ico")" type="image/x-icon">
+            <link rel="apple-touch-icon" href="@routes.Assets.at("images/apple-touch-icon.png")">
+            <link rel="apple-touch-icon" sizes="57x57" href="@routes.Assets.at("images/apple-touch-icon-57x57.png")">
+            <link rel="apple-touch-icon" sizes="72x72" href="@routes.Assets.at("images/apple-touch-icon-72x72.png")">
+            <link rel="apple-touch-icon" sizes="76x76" href="@routes.Assets.at("images/apple-touch-icon-76x76.png")">
+            <link rel="apple-touch-icon" sizes="114x114" href="@routes.Assets.at("images/apple-touch-icon-114x114.png")">
+            <link rel="apple-touch-icon" sizes="120x120" href="@routes.Assets.at("images/apple-touch-icon-120x120.png")">
+            <link rel="apple-touch-icon" sizes="144x144" href="@routes.Assets.at("images/apple-touch-icon-144x144.png")">
+            <link rel="apple-touch-icon" sizes="152x152" href="@routes.Assets.at("images/apple-touch-icon-152x152.png")">
+
+                <!-- BOOTSTRAP STYLES -->
+            <link rel="stylesheet" type="text/css" href="@routes.Assets.at("css/bootstrap.min.css")">
+            <link rel="stylesheet" href="@routes.Assets.at("bootstrap-select/dist/css/bootstrap-select.min.css")">
+                <!-- TEMPLATE STYLES -->
+            <link rel="stylesheet" type="text/css" href="@routes.Assets.at("style.css")">
+                <!-- RESPONSIVE STYLES -->
+            <link rel="stylesheet" type="text/css" href="@routes.Assets.at("css/responsive.css")">
+                <!-- COLORS -->
+            <link rel="stylesheet" type="text/css" href="@routes.Assets.at("css/colors.css")">
+                <!-- CUSTOM STYLES -->
+            <link rel="stylesheet" type="text/css" href="@routes.Assets.at("css/custom.css")">
+                <!-- FONT AWESOME -->
+            <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+            <script type="text/javascript" src="@routes.Assets.at("ckeditor/ckeditor.js")"></script>
+
+                <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        </head>
+
+        <body>
+            <div id="wrapper">
+                <header class="header">
+                    <div class="container-fluid">
+                        <nav class="navbar navbar-default yamm">
+                            <div class="container">
+                                <div class="navbar-header">
+                                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+                                    <a class="navbar-brand" title="" href="dashboard.html"><img src="@routes.Assets.at("images/logo.png")" alt="" class="img-responsive"></a>
+                                </div>
+                                    <!-- end navbar header -->
+
+                                <div id="navbar" class="navbar-collapse collapse">
+                                    <ul class="nav navbar-nav">
+                                        <li><a title="" href="">Employeurs</a></li>
+                                        <li><a title="" href="">Indépendants</a></li>
+                                        <li><a title="" href="">Blog</a></li>
+                                        <li><a title="" href="@routes.SupportController.index()">Nous contacter</a></li>
+                                    </ul>
+
+                                    <ul class="nav navbar-nav navbar-right">
+                                        @if(Controller.session("email") != null && !Controller.session("email").isEmpty) {
+                                            <li class="dropdown yamm-half membermenu hasmenu">
+                                                <a href="dashboard.html#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                                    <img src="@module.avatar.render()" alt="" class="img-circle">
+                                                    <span class="caret"></span>
+                                                </a>
+                                                <ul class="dropdown-menu start-right">
+                                                    <li class="dropdown-header">Bienvenue @user.firstName</li>
+                                                    <li><a href="freelancer-dashboard.html"><span class="glyphicon glyphicon-user"></span>
+                                                        Profil publique</a>
+                                                    </li>
+                                                    <li><a href="@routes.DashboardController.profile()"><span class="glyphicon glyphicon-cog"></span>
+                                                        Préférence du profil</a>
+                                                    </li>
+                                                    <li><a href="freelancer-edit-resume.html"><span class="glyphicon glyphicon-edit"></span>
+                                                        Editer son CV</a>
+                                                    </li>
+                                                    <li><a href="freelancer-active-jobs.html"><span class="glyphicon glyphicon-briefcase"></span>
+                                                        Job actif</a>
+                                                    </li>
+                                                    <li><a href="freelancer-change-password.html"><span class="glyphicon glyphicon-refresh"></span>
+                                                        Changer son mot de passe</a>
+                                                    </li>
+                                                    <li><a href="@routes.UserController.logout()"><span class="glyphicon glyphicon-lock"></span>
+                                                        Se déconnecter</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        } else {
+                                            <li><a href="@routes.UserController.connectPage()" role="button" data-toggle="modal" title="">
+                                                Connexion/Inscription</a></li>
+                                        }
+                                    <li><a class="btn btn-primary" title="" href="">Poster un job</a></li>
+                                    </ul>
+                                        <!-- end dropdown -->
+
+                                </div>
+                                    <!--/.nav-collapse -->
+                            </div>
+                                <!--/.container-fluid -->
+                        </nav>
+                            <!-- end nav -->
+                    </div>
+                        <!-- end container -->
+                </header>
+                    <!-- end header -->
+                @content
+            </div>
+
+            <div id="sitefooter-wrap" class="stickyfooter">
+                <div id="sitefooter" class="container">
+                    <div id="copyright" class="row">
+                        <div class="col-md-6 col-sm-12 text-left">
+                            <p>JobID est une idée d'Alexis Viscogliosi disigné par <a href="http://psdconverthtml.com">
+                                PSD to HTML</a>.</p>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <ul class="list-inline text-right">
+                                <li><a href="#">Copyrights</a></li>
+                                <li><a href="#">Nous contacter</a></li>
+                                <li><a href="#">Twitter</a></li>
+                                <li><a href="#">Facebook</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+                <!-- ******************************************
+    DEFAULT JAVASCRIPT FILES
+    ********************************************** -->
+            <script src="@routes.Assets.at("js/jquery.js")"></script>
+            <script src="@routes.Assets.at("js/bootstrap.min.js")"></script>
+            <script src="@routes.Assets.at("js/all.js")"></script>
+            <script src="@routes.Assets.at("js/custom.js")"></script>
+            <script src="@routes.Assets.at("js/map.js")"></script>
+            <script src="@routes.Assets.at("js/map-upload.js")"></script>
+            <script src="@routes.Assets.at("js/filter_01.js")"></script>
+            <script src="@routes.Assets.at("js/filter_02.js")"></script>
+            <script src="https://unpkg.com/vue/dist/vue.js"></script>
+            <script src="@routes.Assets.at("js/app.js")"></script>
+            <script src='https://www.google.com/recaptcha/api.js'></script>
+            <script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
+
+                <!-- ******************************************
+    ADD YOUR CUSTOM JAVASCRIPT FILES HERE
+    ********************************************** -->
+
+        </body>
+    </html>
+

@@ -1,0 +1,20 @@
+@import views.enums.PanelType
+@()
+
+<form class="submit-form customform loginform" method="post" action="@routes.UserController.login()">
+    <h4>Se connecter</h4>
+    @module.note.render(PanelType.DANGER, "e-login")
+    <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-mail-forward"></i></span>
+        <input name="email" type="text" class="form-control" placeholder="Ton adresse email">
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+        <input name="password" type="password" class="form-control" placeholder="Ton mot de passe">
+    </div>
+    @module.recaptcha.render()
+    <br>
+    <input name="login" type="submit" class="btn btn-custom" value="Se connecter">
+
+
+</form>

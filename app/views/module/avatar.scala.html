@@ -1,0 +1,7 @@
+@()
+@import models.User; val user = User.getByMail(session().get("email"));
+@if(user.getAvatarLoc.isEmpty) {
+    @routes.Assets.at("upload/default_user.png")
+} else {
+    @routes.Assets.at(user.getAvatarLoc)
+}

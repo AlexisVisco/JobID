@@ -1,0 +1,57 @@
+@()
+@import views.html.helper.form
+@import models.User; val user = User.getByMail(session().get("email"));
+@import views.enums.PanelType
+
+
+@module.note(PanelType.SUCCESS, "s-dashboard")
+@module.note(PanelType.DANGER, "e-dashboard")
+@form(action = routes.DashboardController.profilePost(),
+    'enctype -> "multipart/form-data",
+    'class -> "submit-form",
+    'id -> "submit"
+) {
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <label class="control-label">Votre photo <small>S'il vous plaît ajoutez une photo. (800x800 1Mo Max )</small></label>
+            <div class="fileupload fileupload-new" data-provides="fileupload">
+                <div class="fileupload-preview thumbnail"></div>
+                <br>
+                <span class="btn btn-default btn-file">
+                    <span class="fileupload-new">Selectionner une photo</span>
+                    <span class="fileupload-exists">Changer</span>
+                    <input name="avatar" type="file">
+                </span>
+                <a class="btn btn-default fileupload-exists" data-dismiss="fileupload"><i class="fa fa-close"></i></a>
+            </div>
+        </div>
+    </div><!-- end row -->
+    <hr>
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <br>
+            <label class="control-label">Métier <small>(Exemple : Graphiste)</small></label>
+            <input type="text" name="jobTitle" class="form-control">
+            <br>
+            <label class="control-label">Site <small>Entrez votre site ici</small></label>
+            <input type="text" name="website" class="form-control" placeholder="@user.website">
+            <br>
+            <label class="control-label">Email <small>Entrez votre adresse email officiel</small></label>
+            <input type="email" name="email" class="form-control" placeholder="@user.email">
+            <br>
+            <label class="control-label">Email Paypal <small>Entrez votre adresse email pour Paypal</small></label>
+            <input type="email" name="paypalEmail" class="form-control" placeholder="@user.paypalEmail">
+            <br>
+            <label class="control-label">Facebook <small>Entrez l'URL de votre facebook</small></label>
+            <input type="url" name="facebookURL" class="form-control" placeholder="@user.facebookURL">
+            <br>
+            <label class="control-label">Twitter <small>Entrez l'URL de votre twitter</small></label>
+            <input type="url" name="twitterURL" class="form-control" placeholder="@user.twitterURL">
+            <br>
+            <label class="control-label">Linkedin <small>Entrez l'URL de votre linkedin</small></label>
+            <input type="url" name="linkedinURL" class="form-control" placeholder="@user.linkedinURL">
+        </div>
+    </div><!-- end row -->
+    <hr>
+    <button type="submit" class="btn btn-primary">Actualiser le profile</button>
+}

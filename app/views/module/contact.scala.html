@@ -1,0 +1,68 @@
+@import views.enums.PanelType
+@import java.util
+
+@import models.contact.ContactDepartment
+@(department: util.List[ContactDepartment])
+
+
+@module.note.render(PanelType.DANGER, "contact")
+<form id="submit" class="submit-form" method="post" action="@routes.SupportController.postContact()">
+
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <label class="control-label">Votre nom</label>
+            <input type="text" class="form-control" name="lastName"  value="@flash().get("lastName")">
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <label class="control-label">Votre adresse email (valide)</label>
+            <input type="email" class="form-control" name="email" value="@flash().get("email")">
+        </div>
+    </div> <!-- end row -->
+
+    <hr class="invis">
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <label class="control-label">Sujet du value</label>
+            <input type="text" class="form-control" name="subject" value="@flash().get("subject")">
+        </div>
+    </div> <!-- end row -->
+
+    <hr class="invis">
+
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <label class="control-label">Votre site internet</label>
+            <input type="text" class="form-control" name="website" value="http://">
+        </div>
+
+        <div class="row">
+            <div class="col-md-5 col-sm-12">
+                <label class="control-label">Catégorie de support</label>
+                <select name="department" class="selectpicker" data-style="btn-default" data-live-search="true" >
+                @for(d <- department) {
+                    <option value="@d.department">@d.department</option>
+                }
+                </select>
+            </div>
+        </div><!-- end row -->
+    </div> <!-- end row -->
+
+    <hr class="invis">
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <label class="control-label">Votre value</label>
+            <p>
+                <textarea id="content" name="content" placeholder="Ecrivez votre value ici">@flash().get("content")</textarea>
+                <script type="text/javascript">
+                        CKEDITOR.replace('content');
+                </script>
+            </p>
+        </div>
+    </div> <!-- end row -->
+
+    <hr class="invis">
+
+    <button type="submit" class="btn btn-primary">Envoyer !</button>
+</form>

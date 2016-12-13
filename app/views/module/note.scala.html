@@ -1,0 +1,13 @@
+@import views.enums.PanelType
+@import java.util.regex.Pattern
+@import play.Logger
+@(typePanel: PanelType, text: String)
+
+@if(flash().get(text) != null) {
+    <div class="alert alert-dismissible alert-@typePanel.value">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        @for(d <- flash().get(text).split(Pattern.quote("{n}"))) {
+            <p>@d</p>
+        }
+    </div>
+}

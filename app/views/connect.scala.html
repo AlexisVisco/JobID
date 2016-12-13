@@ -1,0 +1,27 @@
+@main("Connexion/Inscription") {
+
+    <div class="db section">
+        <div class="container">
+            <div class="page-title text-center">
+                <div class="heading-holder">
+                    <h1>Inscription / Connexion</h1>
+                </div>
+                <p class="lead">Ici tu peux te connecter ou t'inscrire sur le site.</p>
+            </div>
+        </div> <!-- end container -->
+    </div> <!-- end section -->
+
+    <div class="section wb">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    @module.login.render()
+                </div> <!-- end col -->
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    @module.register.render()
+                </div>
+            </div> <!-- end row -->
+        </div> <!-- end container -->
+    </div> <!-- end section -->
+
+}

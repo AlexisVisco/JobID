@@ -1,0 +1,46 @@
+@import java.util
+
+@import models.contact.ContactDepartment
+@(department: util.List[ContactDepartment])
+
+@main("Nous contacter") {
+
+    <div class="section db">
+        <div class="container">
+            <div class="page-title text-center">
+                <div class="heading-holder">
+                    <h1>Nous contacter</h1>
+                </div>
+                <p class="lead">Si vous avez des questions c'est ici !</p>
+            </div>
+        </div><!-- end container -->
+    </div> <!-- end section -->
+
+    <div class="section lb">
+        <div class="container">
+
+            <div class="row">
+                <div class="content col-md-8">
+                    <div class="post-padding">
+                        <div class="content-title">
+                            <h4>Nous contacter</h4>
+                            <hr>
+                        </div><!-- end widget-title -->
+
+                        <p>Si vous avez des problèmes en rapport avec le site, des bugs, des suggestions ou des offres commerciales à nous proposer nous sommes ouverts à toutes proposition. <br>
+                           Temps de réponse maximum : 72 Heures.</p>
+
+                        <hr class="invis">
+                            @module.contact.render(department)
+
+                    </div><!-- end post-padding -->
+                </div><!-- end col -->
+
+                @module.sidebar.render()
+
+            </div><!-- end col -->
+        </div><!-- end row -->
+    </div> <!-- end section -->
+
+
+}
